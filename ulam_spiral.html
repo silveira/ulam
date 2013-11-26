@@ -1,0 +1,73 @@
+<html>
+ <head>
+  <script type="application/javascript">
+    
+  // primality test from http://www.javascripter.net/faq/numberisprime.htm
+	function isPrime(n) {
+		if (isNaN(n) || !isFinite(n) || n%1 || n<2) return false; 
+		if (n%2==0) return (n==2);
+		if (n%3==0) return (n==3);
+		var m=Math.sqrt(n);
+		for (var i=5;i<=m;i+=6) {
+			if (n%i==0)     return false;
+			if (n%(i+2)==0) return false;
+		}
+		return true;
+	}
+  
+    function draw() {
+      var canvas = document.getElementById('canvas');
+	  var width = canvas.width;
+	  var height = canvas.height;
+	  var pos_x = width/2;
+	  var pos_y = height/2;	  
+	  var fg_color = "rgb(0,200,0)";
+	  var bg_color = "rgb(0,0,0)";
+	  var boxsize = 4;					// pixel size
+	  
+      if (canvas.getContext) {
+        var ctx = canvas.getContext("2d");
+ 
+		// draw a point in the center 
+        
+        		
+		var n = 1;		// the number to be test if it is prime
+		var steps = 1;			// spiral counter while drawing 
+		var direction = 'right';	// spiral direction while drawing		
+		
+		while(n<100000){
+			for(var twice=0; twice<2; twice++){
+				for(var i=0; i<steps; i++){
+					if(isPrime(n)){
+						ctx.fillStyle = fg_color;
+					} else {
+						ctx.fillStyle = bg_color;
+					}
+					ctx.fillRect (pos_x, pos_y, boxsize, boxsize);
+
+					// update the position 
+					if (direction=='up')    { pos_y -= boxsize }
+					if (direction=='left')  { pos_x -= boxsize }
+					if (direction=='down')  { pos_y += boxsize }
+					if (direction=='right') { pos_x += boxsize }
+					
+					n++;
+				}
+
+				// update the direction anticlockwise
+				if      (direction=='up')    {direction = 'left'; }
+				else if (direction=='left')  {direction = 'down'; }
+				else if (direction=='down')  {direction = 'right';}
+				else if (direction=='right') {direction = 'up'; }
+			}
+			
+			steps++;
+		}
+      }
+    }
+  </script>
+ </head>
+ <body onload="draw();">
+   <canvas id="canvas" width="800" height="800"></canvas>
+ </body>
+</html>

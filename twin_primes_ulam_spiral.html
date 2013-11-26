@@ -1,0 +1,95 @@
+<html>
+ <head>
+  <script type="application/javascript">
+    // primality test from http://www.javascripter.net/faq/numberisprime.htm
+  function isPrime(n) {
+		if (isNaN(n) || !isFinite(n) || n%1 || n<2) return false; 
+		if (n%2==0) return (n==2);
+		if (n%3==0) return (n==3);
+		var m=Math.sqrt(n);
+		for (var i=5;i<=m;i+=6) {
+			if (n%i==0)     return false;
+			if (n%(i+2)==0) return false;
+		}
+		return true;
+	}
+  
+    function draw() {
+      var canvas = document.getElementById('canvas');
+	  var width = canvas.width;
+	  var height = canvas.height;
+	  var pos_x = width/2;
+	  var pos_y = height/2;	  
+	  var prime_color = "rgb(0,50,0)";
+	  var twin_color = "rgb(0,200,0)";
+	  var bg_color = "rgb(0,0,0)";
+	  var boxsize = 1;					// pixel size
+	  
+      if (canvas.getContext) {
+        var ctx = canvas.getContext("2d");
+ 
+		// draw a point in the center 
+        
+        		
+		var n = 1;		// the number to be test if it is prime
+		var steps = 1;			// spiral counter while drawing 
+		var direction = 'right';	// spiral direction while drawing		
+		
+		
+		// remember the last prime to find the twins primes. remember their location.
+		var last_prime = n;
+		var last_prime_x = pos_x;
+		var last_prime_y = pos_y;
+		
+		while(n<(width/boxsize)*(height/boxsize)){
+			for(var twice=0; twice<2; twice++){
+				for(var i=0; i<steps; i++){
+					if(isPrime(n)){
+						ctx.fillStyle = prime_color;
+						
+						// is twin? change color and plot the last prime (the other twin will be plotted after)
+						if(n-last_prime==2){
+							ctx.fillStyle = twin_color;
+							ctx.fillRect (last_prime_x, last_prime_y, boxsize, boxsize);
+						}
+						
+						// remember it (regardless if is twin)
+						last_prime = n;
+						last_prime_x = pos_x;
+						last_prime_y = pos_y;
+					} else {
+						ctx.fillStyle = bg_color;
+					}
+					ctx.fillRect (pos_x, pos_y, boxsize, boxsize);
+
+					// update the position 
+					if (direction=='up')    { pos_y -= boxsize }
+					if (direction=='left')  { pos_x -= boxsize }
+					if (direction=='down')  { pos_y += boxsize }
+					if (direction=='right') { pos_x += boxsize }
+					
+					n++;
+				}
+
+				// update the direction anticlockwise
+				if      (direction=='up')    {direction = 'left'; }
+				else if (direction=='left')  {direction = 'down'; }
+				else if (direction=='down')  {direction = 'right';}
+				else if (direction=='right') {direction = 'up'; }
+			}
+			
+			steps++; // the number of steps to go around the spiral
+		}
+      }
+	  
+	  // make it available to "Save As" in the browser
+	  var dataURL = canvas.toDataURL();
+	  document.getElementById('canvasImg').src = dataURL;
+    }
+  </script>
+ </head>
+ <body onload="draw();">
+   <canvas id="canvas" width="800" height="800" style="display:none;"></canvas>
+   <img id="canvasImg" alt="Right click -> Save image as...">
+ </body>
+</html>
