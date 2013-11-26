@@ -13,6 +13,16 @@
 		}
 		return true;
 	}
+   
+     // Returns a color string to be used for an element
+    function get_color(twin_rgb, background_rgb, distance, intervals) {
+      scale = 1 / intervals * distance;
+      r = twin_rgb[0] + Math.round((background_rgb[0] - twin_rgb[0]) * scale);
+      g = twin_rgb[1] + Math.round((background_rgb[1] - twin_rgb[1]) * scale);
+      b = twin_rgb[2] + Math.round((background_rgb[2] - twin_rgb[2]) * scale);
+
+      return "rgb(" + r + "," + g + "," + b + ")";
+    }
   
     function draw() {
       var canvas = document.getElementById('canvas');
