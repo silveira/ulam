@@ -16,17 +16,20 @@
   
     function draw() {
       var canvas = document.getElementById('canvas');
-	  var width = canvas.width;
-	  var height = canvas.height;
-	  var pos_x = width/2;
-	  var pos_y = height/2;	  
-	  var prime_color = "rgb(0,50,0)";
-	  var twin_color = "rgb(0,200,0)";
-	  var bg_color = "rgb(0,0,0)";
-	  var boxsize = 1;					// pixel size
-	  
+      var width = document.getElementById('size').value;
+      var height = width;
+      canvas.width = width;
+      canvas.height = height;
+     
+      var pos_x = width/2;
+      var pos_y = height/2;	  
+      var prime_color = "rgb(0,50,0)";
+      var twin_color = "rgb(0,200,0)";
+      var bg_color = "rgb(0,0,0)";
+      var boxsize = parseInt(document.getElementById('box').value); // pixel size
+
       if (canvas.getContext) {
-        var ctx = canvas.getContext("2d");
+         var ctx = canvas.getContext("2d");
  
 		// draw a point in the center 
         
@@ -89,7 +92,12 @@
   </script>
  </head>
  <body onload="draw();">
-   <canvas id="canvas" width="800" height="800" style="display:none;"></canvas>
+   <div id="settings">
+   Image Size: <input id="size" type="textbox" value="800"/><br>
+   Box size: <input id="box" type="textbox" value="1"/><br>
+   <button onclick="draw();">Redraw</button>
+   </div>
+   <canvas id="canvas" style="display:none;"></canvas>
    <img id="canvasImg" alt="Right click -> Save image as...">
  </body>
 </html>
