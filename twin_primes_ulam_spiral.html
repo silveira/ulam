@@ -15,11 +15,11 @@
 	}
    
      // Returns a color string to be used for an element
-    function get_color(twin_rgb, background_rgb, distance, intervals) {
+    function get_color(foreground_rgb, background_rgb, distance, intervals) {
       scale = 1 / intervals * distance;
-      r = twin_rgb[0] + Math.round((background_rgb[0] - twin_rgb[0]) * scale);
-      g = twin_rgb[1] + Math.round((background_rgb[1] - twin_rgb[1]) * scale);
-      b = twin_rgb[2] + Math.round((background_rgb[2] - twin_rgb[2]) * scale);
+      r = foreground_rgb[0] + Math.round((background_rgb[0] - foreground_rgb[0]) * scale);
+      g = foreground_rgb[1] + Math.round((background_rgb[1] - foreground_rgb[1]) * scale);
+      b = foreground_rgb[2] + Math.round((background_rgb[2] - foreground_rgb[2]) * scale);
 
       return "rgb(" + r + "," + g + "," + b + ")";
     }
@@ -33,10 +33,15 @@
      
       var pos_x = width/2;
       var pos_y = height/2;	  
-      var prime_color = "rgb(0,50,0)";
-      var twin_color = "rgb(0,200,0)";
-      var bg_color = "rgb(0,0,0)";
+      var prime_rgb = [0,50,0];
+      var twin_rgb = [0,200,0];
+      var bg_rgb = [0,0,0];
+      var prime_color = get_color(prime_rgb, prime_rgb, 1, 1); // Precalc for performance
+      var twin_color = get_color(twin_rgb, twin_rgb, 1, 1); // Precalc for performance
+      var bg_color = get_color(bg_rgb, bg_rgb, 1, 1); // Precalc for performance
       var boxsize = parseInt(document.getElementById('box').value); // pixel size
+
+      var intervals = parseInt(document.getElementById('intervals').value)
 
       if (canvas.getContext) {
          var ctx = canvas.getContext("2d");
@@ -47,6 +52,8 @@
 		var n = 1;		// the number to be test if it is prime
 		var steps = 1;			// spiral counter while drawing 
 		var direction = 'right';	// spiral direction while drawing		
+      var distance = 0;
+      var latest_color = prime_rgb;
 		
 		
 		// remember the last prime to find the twins primes. remember their location.
@@ -59,11 +66,14 @@
 				for(var i=0; i<steps; i++){
 					if(isPrime(n)){
 						ctx.fillStyle = prime_color;
+                  latest_color = prime_rgb;
+                  distance = 0;
 						
 						// is twin? change color and plot the last prime (the other twin will be plotted after)
 						if(n-last_prime==2){
 							ctx.fillStyle = twin_color;
 							ctx.fillRect (last_prime_x, last_prime_y, boxsize, boxsize);
+                     latest_color = twin_rgb;
 						}
 						
 						// remember it (regardless if is twin)
@@ -71,7 +81,12 @@
 						last_prime_x = pos_x;
 						last_prime_y = pos_y;
 					} else {
-						ctx.fillStyle = bg_color;
+						if (distance < intervals) {
+                     distance += 1;
+                     ctx.fillStyle = get_color(latest_color, bg_rgb, distance, intervals);
+                  } else {
+                     ctx.fillStyle = bg_color;
+                  }
 					}
 					ctx.fillRect (pos_x, pos_y, boxsize, boxsize);
 
@@ -105,6 +120,7 @@
    <div id="settings">
    Image Size: <input id="size" type="textbox" value="800"/><br>
    Box size: <input id="box" type="textbox" value="1"/><br>
+   Trail size: <input id="intervals" type="textbox" value="1"/><br>
    <button onclick="draw();">Redraw</button>
    </div>
    <canvas id="canvas" style="display:none;"></canvas>
