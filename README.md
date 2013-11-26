@@ -29,4 +29,4 @@ git clone https://github.com/silveira/ulam
 
 And open the html files in a modern browser.
 
-[http://silveiraneto.net/2013/05/14/twin-primes-visualized-over-an-ulam-spiral-in-html5](This content was posted originally on my personal blog).
+[This content was posted originally on my personal blog](http://silveiraneto.net/2013/05/14/twin-primes-visualized-over-an-ulam-spiral-in-html5).
