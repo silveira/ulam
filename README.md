@@ -13,5 +13,20 @@ This “vortex effect” is created because every twin prime is followed by its 
 
 ![twin primes ulam spiral](http://silveiraneto.net/wp-content/uploads/2013/05/twin_primes_ulam_spiral_pixelsize_10.png "twin primes ulam spiral")
 
- in HTML5
- ===
+in HTML5
+====
+
+[http://silveiraneto.net/wp-content/uploads/2013/05/twin_primes_ulam_spiral.html](HTML5 demo with Canvas + Javacript).
+Be aware that this page can be computational intensive and freeze your browser for a few seconds.
+
+ 
+Try it yourself
+===
+
+```
+git clone https://github.com/silveira/ulam
+```
+
+And open the html files in a modern browser.
+
+[http://silveiraneto.net/2013/05/14/twin-primes-visualized-over-an-ulam-spiral-in-html5](This content was posted originally on my personal blog).
