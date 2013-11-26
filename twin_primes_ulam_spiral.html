@@ -115,14 +115,25 @@
 	  document.getElementById('canvasImg').src = dataURL;
     }
   </script>
+  <style>
+      .fields input {
+        display:inline-block;
+        width: 48px;
+      }
+
+      .fields label {
+        display:inline-block;
+        width: 80px;
+      }
+  </style>
  </head>
  <body onload="draw();">
-   <div id="settings">
-   Image Size: <input id="size" type="textbox" value="800"/><br>
-   Box size: <input id="box" type="textbox" value="1"/><br>
-   Trail size: <input id="intervals" type="textbox" value="1"/><br>
-   <button onclick="draw();">Redraw</button>
-   </div>
+   <fieldset id="settings" class="fields">
+      <div><label>Image Size:</label><input id="size" type="textbox" value="800"/></div>
+      <div><label>Box size:</label><input id="box" type="textbox" value="1"/></div>
+      <div><label>Trail size:</label><input id="intervals" type="textbox" value="1"/></div>
+      <button onclick="draw();">Redraw</button>
+   </fieldset>
    <canvas id="canvas" style="display:none;"></canvas>
    <img id="canvasImg" alt="Right click -> Save image as...">
  </body>
