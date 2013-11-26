@@ -1,4 +1,4 @@
-Twin primes visualized over an Ulam Spiral in HTML5
+Twin primes visualized over an Ulam Spiral
 ====
 
 Two numbers p and q are twin primes if they are primes and |p – q | = 2.
@@ -12,3 +12,6 @@ In the visualization below, I’m drawing the prime numbers in two shades of gre
 This “vortex effect” is created because every twin prime is followed by its twin two steps before in the spiral. Below the same image with the zoom in the center:
 
 ![twin primes ulam spiral](http://silveiraneto.net/wp-content/uploads/2013/05/twin_primes_ulam_spiral_pixelsize_10.png "twin primes ulam spiral")
+
+ in HTML5
+ ===
