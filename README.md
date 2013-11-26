@@ -20,7 +20,7 @@ in HTML5
 Be aware that this page can be computational intensive and freeze your browser for a few seconds.
 
  
-Try it yourself
+try it yourself
 ===
 
 ```
