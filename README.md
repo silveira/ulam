@@ -13,6 +13,14 @@ This “vortex effect” is created because every twin prime is followed by its 
 
 ![twin primes ulam spiral](http://silveiraneto.net/wp-content/uploads/2013/05/twin_primes_ulam_spiral_pixelsize_10.png "twin primes ulam spiral")
 
+The Prime Conspiracy
+====
+
+See details at http://silveiraneto.net/2016/03/14/the-prime-conspiracy-visualized-over-an-ulam-spiral-in-html5/.
+
+![conspiracy ulam spiral](http://silveiraneto.net/wp-content/uploads/2016/03/prime_conspiracy_ulam.png "conspiracy ulam spiral")
+
+
 in HTML5
 ====
 
